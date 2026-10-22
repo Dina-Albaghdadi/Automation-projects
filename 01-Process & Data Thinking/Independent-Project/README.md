@@ -372,7 +372,7 @@ If I continued developing this project, I would:
 
 **Workflow:** [Zap — IT Support Request Intake & Routing (v3)](https://zapier.com/editor/383196730/published) _(private Zapier workspace — the full workflow is shown in the screenshot above)_
 
-**Repository:** [IT Support Requests](https://github.com/Dina-Albaghdadi/Automation-projects/tree/main/01-Process%20%26%20Data%20Thinking/Independent-Project)
+**Repository:** [ai-it-support-intake](https://github.com/Dina-Albaghdadi/ai-it-support-intake)
 
 ---
 
