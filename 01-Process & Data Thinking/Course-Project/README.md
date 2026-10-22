@@ -191,45 +191,31 @@ Each path has its own clear outcome (`false` / `web_team` or `true` / `human_rev
 
 ## 🧪 Testing
 
-### Test 1 — Complete request
+All tests were run **end-to-end from the Google Form** (no "Test step" inside Zapier), one request per test. Test data uses `@example.com` addresses.
 
-**Input:**  
-`We need a website for our company. Our budget is $5000. We need it next month.`
+| # | Scenario | Request | Expected | Actual | Status |
+|---|---|---|---|---|---|
+| TC01 | Complete request | `We need a website for our company. Our budget is $5000. We need it next month.` | `VALID` → web_team | website / next month / $5000 / `NONE` / `VALID` / `FALSE` / `web_team` | ✅ |
+| TC02 | Missing budget | `We need a website for our company. We need it next month.` | `NEEDS_REVIEW` → human_review | budget empty / missing `budget` / `NEEDS_REVIEW` / `TRUE` / `human_review` | ✅ |
+| TC03 | Ambiguous timeline | `We need a website soon. Our budget is $5000.` | `NEEDS_REVIEW` → human_review | timeline empty (*"soon"* not converted to a date) / missing `timeline` / `NEEDS_REVIEW` / `TRUE` / `human_review` | ✅ |
+| TC04 | Multiple missing fields | `We need a website for our company.` | `NEEDS_REVIEW` → human_review | missing `timeline, budget` / `NEEDS_REVIEW` / `TRUE` / `human_review` | ✅ |
+| TC05 | No details | `Hello` | `NEEDS_REVIEW` → human_review | missing `service_type, timeline, budget` / `NEEDS_REVIEW` / `TRUE` / `human_review` | ✅ |
 
-**Expected Result:**  
-`service_type = website`, `timeline = next month`, `budget = $5000`, `missing_information = NONE`, `request_status = VALID` → **valid** path → `false` / `web_team` → email *New Valid Client Request*.
+**Result: 5 / 5 passed.** Each request reached the correct path, wrote one row, and sent the matching email.
 
-**Actual Result:**  
-`website` / `next month` / `$5000` / `NONE` / `VALID` / `FALSE` / `web_team` (row 2).
+### Results sheet
 
-**Status:** ✅
+![Results sheet with TC01–TC05](./Screenshots/test-results-sheet.png)
 
----
+### Emails
 
-### Test 2 — Request with no details
-
-**Input:**  
-`Hello`
-
-**Expected Result:**  
-No service, timeline, or budget → `NEEDS_REVIEW` → **Fallback** path → `true` / `human_review`.
-
-**Actual Result:**  
-`request_summary = The client said hello.`, `missing_information = service_type, timeline, budget`, `NEEDS_REVIEW` / `TRUE` / `human_review` (row 6).
-
-**Status:** ✅
-
-![Client requests sheet](./Screenshots/client-requests-sheet.png)
-
-> **Note on rows 3–5:** these are repeated runs of Test 1 while building and testing the Zap steps. Rows 4–5 show `VALID` with `requires_human = TRUE` — most likely from testing the **Fallback** sheet step with the Test 1 sample data, not from real routing, so they are not counted as results.
+| Valid path (TC01) | Human review path (TC03) |
+|---|---|
+| ![New Valid Client Request email](./Screenshots/email-valid-tc01.png) | ![Client Request Requires Human Review email](./Screenshots/email-human-review-tc03.png) |
 
 ---
 
 ## 📸 Evidence
-
-### Final Result
-
-![Final Result](./Screenshots/client-requests-sheet.png)
 
 ### Workflow
 
@@ -241,15 +227,14 @@ No service, timeline, or budget → `NEEDS_REVIEW` → **Fallback** path → `tr
 
 What didn't work as expected?
 
-- Testing a step inside a path (for example, the Fallback sheet step) writes a row using the sample data, even if that sample would never take that path — this produced rows that look inconsistent (`VALID` + `requires_human = TRUE`).
-- The `processed_at` column stayed empty because it was not mapped in the sheet step.
+- Using **Test step** inside Zapier writes real rows with sample data, which mixed test rows with real results.
 - *"Hello"* was accepted by the form because the **Request** field only checks that something was typed.
 
 How did I solve it?
 
-- Identified test-step rows by comparing each row with the path it should belong to, and documented them instead of counting them as results.
+- Re-ran all tests from the form, and all five passed.
 - Kept the routing decision on one value (`request_status`) so every real run could be checked against the expected path.
-- Recorded `processed_at` and stricter form validation as improvements.
+- Recorded stricter form validation as an improvement.
 
 ---
 
@@ -273,7 +258,6 @@ Think first, build later: understanding the work, the data, and the decisions be
 
 If I continued developing this project, I would:
 
-- Map `processed_at` to record when each request was handled.
 - Make **Client Name** required and add a minimum length to the **Request** field.
 - Send the client an automatic email asking for the missing information.
 - Route valid requests to different teams by `service_type` (web, marketing, apps).
@@ -286,7 +270,7 @@ If I continued developing this project, I would:
 
 **Workflow:** [Zap — Clients Requests](https://zapier.com/editor/383094964/draft) _(private Zapier workspace — the full workflow is shown in the screenshot above)_
 
-**Repository:** [AI Client Intake & Request Routing System](https://github.com/Dina-Albaghdadi/AI-Automation-Student-Portfolio-Template/tree/main/01-Process%20%26%20Data%20Thinking/Course-Project)
+**Repository:** [AI Client Intake & Request Routing System](https://github.com/Dina-Albaghdadi/Automation-projects/tree/main/01-Process%20%26%20Data%20Thinking/Course-Project)
 
 ---
 
@@ -352,14 +336,21 @@ If I continued developing this project, I would:
 
 ### 🧪 الاختبارات
 
-- **طلب مكتمل** (موقع، الشهر القادم، 5000$): `VALID` → فريق المواقع ✅
-- **طلب بدون تفاصيل** (`Hello`): كل الحقول ناقصة → `NEEDS_REVIEW` → مراجعة بشرية ✅
-- **ملاحظة:** الصفوف 3–5 تكرار لتجربة الطلب المكتمل أثناء البناء، والصفان 4–5 ناتجان على الأغلب عن اختبار خطوة الشيت في مسار Fallback ببيانات العينة، فلا يُحسبان كنتائج.
+كل الاختبارات أُرسلت **من Google Form مباشرة** (بدون Test step داخل Zapier)، طلب واحد لكل اختبار.
+
+| # | الحالة | المتوقع | النتيجة |
+|---|---|---|---|
+| TC01 | طلب مكتمل | `VALID` → فريق المواقع | ✅ |
+| TC02 | ميزانية ناقصة | `NEEDS_REVIEW` → مراجعة بشرية | ✅ |
+| TC03 | مدة غامضة (*"soon"*) | `NEEDS_REVIEW`، والـAI لم يحوّل *"soon"* إلى تاريخ | ✅ |
+| TC04 | أكثر من حقل ناقص | `NEEDS_REVIEW`، والناقص: المدة والميزانية | ✅ |
+| TC05 | بدون تفاصيل (`Hello`) | `NEEDS_REVIEW`، والناقص: الحقول الثلاثة | ✅ |
+
+**النتيجة: 5 من 5.** كل طلب وصل للمسار الصحيح، وسُجّل في صف واحد، وأُرسل البريد المناسب.
 
 ### ⚠️ التحديات وكيف حللتها
 
-- اختبار خطوة داخل مسار يكتب صفًا ببيانات العينة حتى لو لم تكن تنتمي لهذا المسار، فظهرت صفوف تبدو غير متسقة. حددتها بمقارنة كل صف بالمسار المتوقع ووثّقتها بدل احتسابها.
-- عمود `processed_at` بقي فارغًا لأنه لم يُربط في خطوة الشيت، وسجلته كتحسين.
+- استخدام **Test step** داخل Zapier يكتب صفوفًا حقيقية ببيانات العينة، فاختلطت بالنتائج الحقيقية. لذلك أعدت كل الاختبارات من الفورم مباشرة، ونجحت الخمسة.
 - النموذج قبل كلمة *"Hello"* لأن حقل الطلب يتحقق فقط من وجود نص، وسجلت التحقق الأقوى كتحسين.
 
 ### 📚 ماذا تعلمت
@@ -370,6 +361,6 @@ If I continued developing this project, I would:
 
 ### 🔮 تحسينات مستقبلية
 
-ربط `processed_at`، وجعل اسم العميل إجباريًا مع حد أدنى لطول الطلب، وإرسال بريد تلقائي للعميل يطلب المعلومات الناقصة، وتوجيه الطلبات الصالحة لفرق مختلفة حسب نوع الخدمة.
+جعل اسم العميل إجباريًا مع حد أدنى لطول الطلب، وإرسال بريد تلقائي للعميل يطلب المعلومات الناقصة، وتوجيه الطلبات الصالحة لفرق مختلفة حسب نوع الخدمة.
 
 </div>
