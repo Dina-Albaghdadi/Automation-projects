@@ -34,16 +34,16 @@
 
 ### 01 — Guided Project
 
-**Project:** [Course Project Name]
+**Project:** SkillBridge Lite — AI-Powered Career Fit Assistant
 
 تطبيق عملي أبني فيه حلًا باستخدام AI App Builder، انطلاقًا من مشكلة ومتطلبات واضحة.
 
-- **Problem:** [المشكلة]
-- **Target Users:** [المستخدمون المستهدفون]
-- **Solution:** [الحل]
-- **Tools:** [الأدوات المستخدمة]
+- **Problem:** صعوبة فهم علاقة الملف المهني بفرصة محددة، وأدوات AI العامة تجامل أو تخترع مهارات.
+- **Target Users:** الطلاب والخريجون الجدد والمهنيون في بداية مسيرتهم.
+- **Solution:** تطبيق يقارن الملف بفرصة مختارة ويعرض المهارات المناسبة مع أدلة من الملف، والفجوات، والخطوات التالية.
+- **Tools:** Lovable، React، AI (Structured Output)، Zod، Vitest
 
-[Explore the Project](./course-project/)
+[Explore the Project](./Course-Project/)
 
 ### 02 — Independent Project
 
@@ -56,7 +56,7 @@
 - **Solution:** [الحل]
 - **Tools:** [الأدوات المستخدمة]
 
-[Explore the Project](./independent-project/)
+[Explore the Project](./Independent-Project/)
 
 ---
 
