@@ -36,15 +36,15 @@
 
 ### 01 — Guided Project
 
-**Project:** [Course Project Name]
+**Project:** TaskBridge — Work Planning Web Application
 
 أختبر حلًا عمليًا باستخدام حالات اختبار محددة، وأوثق النتائج وأحدد جوانب التحسين.
 
-- **System Under Test:** [النظام الذي يجري اختباره]
-- **Testing Focus:** [ما الذي أختبره]
-- **Tools:** [الأدوات المستخدمة]
+- **System Under Test:** تطبيق TaskBridge لإدارة الخطط والمهام (Lovable + Supabase)
+- **Testing Focus:** المصادقة، وعمليات CRUD، وحساب نسبة الإنجاز، وحفظ البيانات، وعزل بيانات المستخدمين بـRLS، والحذف المتسلسل (14 اختبارًا بحسابين)
+- **Tools:** Lovable، Supabase Auth، PostgreSQL، RLS
 
-[Explore the Project](./course-project/)
+[Explore the Project](./Course-Project/)
 
 ### 02 — Independent Project
 
@@ -56,7 +56,7 @@
 - **Testing Focus:** [محور الاختبار]
 - **Tools:** [الأدوات المستخدمة]
 
-[Explore the Project](./independent-project/)
+[Explore the Project](./Independent-Project/)
 
 ---
 
@@ -93,8 +93,8 @@
 
 ## 🔗 Related Projects
 
-- [Guided Project](./course-project/)
-- [Independent Project](./independent-project/)
+- [Guided Project](./Course-Project/)
+- [Independent Project](./Independent-Project/)
 
 ---
 
