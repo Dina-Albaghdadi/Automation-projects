@@ -6,8 +6,6 @@
 
 ![XYZ Real Estate workflow](./Screenshots/workflow.png)
 
-> 📸 Conversation and Google Sheet screenshots will be added.
-
 ---
 
 ## 🎯 Problem
@@ -138,11 +136,30 @@ Each customer keeps their own conversation context; customers never share memory
 
 ## 🧪 Testing
 
-> Test results (buy request, rent request, missing info, invalid email, correction, no confirmation, confirmation, duplicate) and screenshots will be added.
+### Test 1 — Rent request: rule applied, then confirmation before saving
+
+**Input:**  
+A rental request for a villa. At the summary step, the customer answered *"new"* to a field that does not apply to rentals, then confirmed.
+
+**Expected Result:**  
+For rentals, *New/Resale* and *First Purchase* stay *Not Applicable*; the agent explains this instead of accepting the answer, asks for confirmation again, and saves only after the customer confirms.
+
+**Actual Result:**  
+The agent explained that *New/Resale* does not apply to rentals and is recorded as *Not Applicable*, asked to confirm the summary again, and only after *"تمام"* replied that the details were recorded successfully.
+
+**Status:** ✅
+
+![Confirm and save](./Screenshots/telegram-confirm-and-save.png)
+
+> More tests (buy request, missing information, invalid email, correction, no confirmation, duplicate) will be added.
 
 ---
 
 ## 📸 Evidence
+
+### Final Result
+
+![Confirm and save](./Screenshots/telegram-confirm-and-save.png)
 
 ### Workflow
 

@@ -108,7 +108,7 @@ Several tasks in one message · unclear prayer · task not scheduled today · ta
 
 **Workflow:** n8n (in progress)
 
-**Repository:** My-Daily-Progress-Telegram-bot (private until finished)
+**Repository:** [My-Daily-Progress-Telegram-bot](https://github.com/Dina-Albaghdadi/My-Daily-Progress-Telegram-bot)
 
 ---
 
