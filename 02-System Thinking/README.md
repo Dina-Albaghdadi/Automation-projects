@@ -4,9 +4,11 @@
 
 > Build the system, not just the screen.
 
-في هذه الوحدة، أتعلم كيف أحوّل المشكلة إلى متطلبات واضحة، وأصمم تجربة المستخدم وسلوك النظام، ثم أستخدم AI App Builders لبناء تطبيق يخدم احتياجًا حقيقيًا.
+In this unit, I learned how to turn a problem into clear requirements, design the user experience and the system's behavior, and use AI App Builders to build an application that serves a real need.
 
-لا يقتصر العمل على إنشاء واجهة جميلة؛ بل يشمل التفكير في المستخدم، والوظائف المطلوبة، وتدفق الاستخدام، والبيانات التي يحتاجها التطبيق.
+The work is not only about a good-looking interface. It covers the user, the required functions, the user flow, and the data the application needs.
+
+**🌐 English** · [العربية](#-النسخة-العربية)
 
 ---
 
@@ -14,19 +16,19 @@
 
 **AI-Powered Solution Building**
 
-القدرة على تحويل المشكلة إلى متطلبات وتصميم نظام وبناء تطبيق باستخدام أدوات مدعومة بالذكاء الاصطناعي.
+The ability to turn a problem into requirements, design a system, and build an application with AI-powered tools.
 
 ---
 
 ## 🧠 What I Learned
 
-- **Problem Definition:** تحديد المشكلة التي سيعالجها التطبيق.
-- **User & Goal Definition:** تحديد المستخدمين وأهدافهم.
-- **Requirements:** تحويل الاحتياجات إلى وظائف واضحة.
-- **User Flow:** تصميم خطوات انتقال المستخدم داخل التطبيق.
-- **System Behavior:** تحديد ما يجب أن يحدث عند تنفيذ كل إجراء.
-- **Data Modeling:** تحديد البيانات التي يحتاجها التطبيق والعلاقات بينها.
-- **AI App Building:** توجيه AI App Builders لبناء التطبيق وتحسينه.
+- **Problem Definition:** define the problem the application solves.
+- **User & Goal Definition:** define the users and their goals.
+- **Requirements:** turn needs into clear functions, and decide what is out of scope (MVP).
+- **User Flow:** design how the user moves through the application.
+- **System Behavior:** define what should happen for each action.
+- **Data Modeling:** define the data the application needs.
+- **AI App Building:** direct an AI App Builder step by step and review what it produces.
 
 ---
 
@@ -36,25 +38,20 @@
 
 **Project:** SkillBridge Lite — AI-Powered Career Fit Assistant
 
-تطبيق عملي أبني فيه حلًا باستخدام AI App Builder، انطلاقًا من مشكلة ومتطلبات واضحة.
-
-- **Problem:** صعوبة فهم علاقة الملف المهني بفرصة محددة، وأدوات AI العامة تجامل أو تخترع مهارات.
-- **Target Users:** الطلاب والخريجون الجدد والمهنيون في بداية مسيرتهم.
-- **Solution:** تطبيق يقارن الملف بفرصة مختارة ويعرض المهارات المناسبة مع أدلة من الملف، والفجوات، والخطوات التالية.
-- **Tools:** Lovable، React، AI (Structured Output)، Zod، Vitest
+- **Problem:** People early in their career struggle to see how their skills relate to a specific opportunity, and generic AI tools flatter or invent skills.
+- **Target Users:** Students, recent graduates, and early-career professionals.
+- **Solution:** An app that compares a profile with a selected opportunity and returns relevant skills with evidence quoted from the profile, potential gaps, and next steps.
+- **Tools:** Lovable, AI (structured output), Zod, Vitest
 
 [Explore the Project](./Course-Project/)
 
 ### 02 — Independent Project
 
-**Project:** [Independent Project Name]
+**Project:** Professional Portfolio *(in progress)*
 
-تطبيق مستقل أحوّل فيه فكرة إلى تطبيق له مستخدمون ووظائف وتدفق استخدام واضح.
-
-- **Problem:** [المشكلة]
-- **Target Users:** [المستخدمون المستهدفون]
-- **Solution:** [الحل]
-- **Tools:** [الأدوات المستخدمة]
+- **Problem:** A portfolio should show who I am and what I built, not only a static CV.
+- **Solution:** A professional portfolio built with Lovable, with an AI feature that adds real value for visitors.
+- **Tools:** Lovable
 
 [Explore the Project](./Independent-Project/)
 
@@ -62,14 +59,12 @@
 
 ## 🔍 Engineering Focus
 
-في هذه الوحدة، أركز على:
-
-1. تحديد ما يحتاج التطبيق إلى تحقيقه.
-2. التمييز بين متطلبات المستخدم وشكل الواجهة.
-3. تصميم User Flow واضح.
-4. تحديد وظائف التطبيق وسلوكه.
-5. فهم البيانات التي يحتاجها النظام.
-6. توجيه AI لبناء الحل ومراجعة ما ينتجه.
+1. What does the application need to achieve?
+2. What is a user requirement, and what is only interface design?
+3. What is the clearest user flow?
+4. What should the system do for each action?
+5. What data does the system need?
+6. How do I direct the AI builder and review what it produces?
 
 ---
 
@@ -77,27 +72,59 @@
 
 **AI can generate an application, but the quality of the system depends on the quality of its design.**
 
-يمكن للذكاء الاصطناعي إنشاء التطبيق، لكن جودة النظام تعتمد على وضوح التصميم والمتطلبات.
-
 ---
 
 ## 📈 Capability Progress
 
-- [ ] تحديد المشكلة والمستخدمين.
-- [ ] كتابة المتطلبات الأساسية.
-- [ ] تصميم User Flow.
-- [ ] تحديد System Behavior.
-- [ ] تحديد البيانات المطلوبة.
-- [ ] بناء التطبيق باستخدام AI App Builder.
-- [ ] توثيق التطبيق وقرارات التصميم.
+- [x] Define the problem and the users.
+- [x] Write the core requirements and the MVP scope.
+- [x] Design the user flow.
+- [x] Define the system behavior.
+- [x] Define the required data.
+- [x] Build the application with an AI App Builder.
+- [x] Document the application and the design decisions.
 
 ---
 
 ## 🔗 Related Projects
 
-- [Guided Project](./course-project/)
-- [Independent Project](./independent-project/)
+- [Guided Project — SkillBridge Lite](./Course-Project/)
+- [Independent Project — Professional Portfolio](./Independent-Project/)
 
 ---
 
-**Next:** U3 — PROVE IT WORKS
+**Next:** [U3 — PROVE IT WORKS](../03-Evaluation%20%26%20Diagnostic%20Thinking/)
+
+---
+---
+
+<div dir="rtl">
+
+## 🌍 النسخة العربية
+
+### U2 — ابنِ النظام
+
+> ابنِ النظام، لا الواجهة فقط.
+
+في هذه الوحدة، تعلمت كيف أحوّل المشكلة إلى متطلبات واضحة، وأصمم تجربة المستخدم وسلوك النظام، ثم أستخدم أدوات بناء التطبيقات بالذكاء الاصطناعي لبناء تطبيق يخدم احتياجًا حقيقيًا. لا يقتصر العمل على واجهة جميلة، بل يشمل المستخدم، والوظائف المطلوبة، وتدفق الاستخدام، والبيانات.
+
+### 🧠 ماذا تعلمت
+
+- **تعريف المشكلة:** تحديد المشكلة التي يعالجها التطبيق.
+- **المستخدمون وأهدافهم:** تحديد من سيستخدم التطبيق ولماذا.
+- **المتطلبات:** تحويل الاحتياجات إلى وظائف واضحة، وتحديد ما هو خارج النطاق.
+- **تدفق الاستخدام:** تصميم خطوات انتقال المستخدم داخل التطبيق.
+- **سلوك النظام:** تحديد ما يجب أن يحدث عند كل إجراء.
+- **نمذجة البيانات:** تحديد البيانات التي يحتاجها التطبيق.
+- **البناء بالذكاء الاصطناعي:** توجيه أداة البناء خطوة بخطوة ومراجعة ما تنتجه.
+
+### 🛠️ المشاريع
+
+- **مشروع المحاضرة — SkillBridge Lite:** تطبيق يقارن الملف المهني بفرصة عمل، ويعرض المهارات المناسبة مع أدلة من الملف، والفجوات، والخطوات التالية.
+- **المشروع المستقل — Professional Portfolio** *(قيد التنفيذ)*: ملف مهني مبني بـLovable مع ميزة ذكاء اصطناعي ذات قيمة للزائر.
+
+### 📌 الخلاصة
+
+يمكن للذكاء الاصطناعي إنشاء التطبيق، لكن جودة النظام تعتمد على وضوح التصميم والمتطلبات.
+
+</div>
