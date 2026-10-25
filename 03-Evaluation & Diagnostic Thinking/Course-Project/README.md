@@ -258,6 +258,16 @@ If I continued developing this project, I would:
 
 ---
 
+## 📁 Project Files
+
+| File | Contents |
+|---|---|
+| [README.md](./README.md) | Project overview, design, and test results |
+| [database-schema.md](./database-schema.md) | Tables, constraints, RLS policies, verification, and SQL |
+| [lovable-build-prompt.md](./lovable-build-prompt.md) | The prompt used to build the app in Lovable |
+
+---
+
 ## 🔗 Project Links
 
 **Live Demo:** [taskbridge-plans.lovable.app](https://taskbridge-plans.lovable.app)
