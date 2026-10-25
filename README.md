@@ -53,10 +53,10 @@ The projects demonstrate my progression from understanding real-world work to de
 | U1 | Process & Data Thinking | 2 Projects | ✅ |
 | U2 | AI-Powered Solution Building | 2 Projects | 🟡 |
 | U3 | Quality Thinking | 2 Projects | ✅ |
-| U4 | Knowledge Grounding | 2 Projects | ⬜ |
-| U5 | Agent & Decision Thinking | 2 Projects | ⬜ |
+| U4 | Knowledge Grounding | 2 Projects | 🟡 |
+| U5 | Agent & Decision Thinking | 2 Projects | 🟡 |
 | U6 | Integration Thinking | 1 Project | ✅ |
-| U7 | Reliability Thinking | 2 Projects | ⬜ |
+| U7 | Reliability Thinking | 1 Project | ✅ |
 | U8 | Solution Engineering | 2 Projects | ⬜ |
 
 ---
@@ -95,18 +95,18 @@ Designed the database and Row Level Security, built the web app, and proved it w
 
 ---
 
-### ⭐ Project 03 — [Project Name]
+### ⭐ Project 03 — PlanCraft AI: AI Project Planner
 
 **What it solves:**  
-[Short description]
+Turns a project idea into a structured plan (phases, actions, risks, duration). A web app, an automation workflow, an AI agent, and a database work together asynchronously.
 
 **Tools:**  
-[Tools]
+Lovable, n8n (Webhook, AI Agent, Structured Output), Google Gemini, Supabase
 
 **My role:**  
-[What I designed/built]
+Connected the four components and debugged five integration failures end to end — from missing secrets to a hidden newline in the request ID — until real requests completed.
 
-🔗 [View Project](./path-to-project)
+🔗 [View Project](./06-Automation%20%26%20Integration%20Thinking/Course-Project/)
 
 ---
 
@@ -146,7 +146,7 @@ I learned how to transform a problem into a system and use AI-powered tools to d
 
 ### Projects
 
-#### 01 — [Course Project Name]
+#### 01 — SkillBridge Lite: AI Career Fit Assistant
 
 **Type:** Guided Project
 
@@ -170,7 +170,7 @@ I learned how to test AI-powered systems, identify failures, evaluate outputs, a
 
 ### Projects
 
-#### 01 — [Course Project Name]
+#### 01 — TaskBridge: Work Planning Web Application
 
 **Type:** Guided Project
 
@@ -194,17 +194,17 @@ I learned how AI systems can work with external knowledge and how to design solu
 
 ### Projects
 
-#### 01 — AI Knowledge Assistant
+#### 01 — TECHFIX: AI Computer Troubleshooting Assistant
 
 **Type:** Guided Project
 
-🔗 [View Project](./04-ground-its-knowledge/course-project)
+🔗 [View Project](./04-Grounding%20Thinking/Course-Project/)
 
-#### 02 — [Independent Project Name]
+#### 02 — PolicyBot: Knowledge-Grounded IT Policy Assistant
 
 **Type:** Independent Project
 
-🔗 [View Project](./04-ground-its-knowledge/independent-project)
+🔗 [View Project](./04-Grounding%20Thinking/Independent-Project/)
 
 ---
 
@@ -218,17 +218,17 @@ I learned when an Agent is appropriate, how AI can make decisions, and how to ke
 
 ### Projects
 
-#### 01 — [Course Project Name]
+#### 01 — XYZ Real Estate: AI Agent
 
 **Type:** Guided Project
 
-🔗 [View Project](./05-control-its-agency/course-project)
+🔗 [View Project](./05-Agent%20%26%20Decision%20Thinking/Course-Project/)
 
-#### 02 — [Independent Project Name]
+#### 02 — My Daily Progress: Telegram AI Agent
 
 **Type:** Independent Project
 
-🔗 [View Project](./05-control-its-agency/independent-project)
+🔗 [View Project](./05-Agent%20%26%20Decision%20Thinking/Independent-Project/)
 
 ---
 
@@ -262,17 +262,13 @@ I learned how to design AI-powered systems that handle errors, unexpected inputs
 
 ### Projects
 
-#### 01 — [Course Project Name]
+#### 01 — RAG with n8n: Knowledge Pipeline & RAG AI Agent
 
 **Type:** Guided Project
 
-🔗 [View Project](./07-make-it-reliable/course-project)
+🔗 [View Project](./07-Reliability%20%26%20Production%20Thinking/Course-Project/)
 
-#### 02 — [Independent Project Name]
-
-**Type:** Independent Project
-
-🔗 [View Project](./07-make-it-reliable/independent-project)
+_This unit has no independent project._
 
 ---
 
