@@ -51,11 +51,11 @@ The projects demonstrate my progression from understanding real-world work to de
 | Unit | Capability | Projects | Status |
 |---|---|---|---|
 | U1 | Process & Data Thinking | 2 Projects | ✅ |
-| U2 | AI-Powered Solution Building | 2 Projects | ⬜ |
-| U3 | Quality Thinking | 2 Projects | 🟡 |
+| U2 | AI-Powered Solution Building | 2 Projects | 🟡 |
+| U3 | Quality Thinking | 2 Projects | ✅ |
 | U4 | Knowledge Grounding | 2 Projects | ⬜ |
 | U5 | Agent & Decision Thinking | 2 Projects | ⬜ |
-| U6 | Integration Thinking | 2 Projects | ⬜ |
+| U6 | Integration Thinking | 1 Project | ✅ |
 | U7 | Reliability Thinking | 2 Projects | ⬜ |
 | U8 | Solution Engineering | 2 Projects | ⬜ |
 
@@ -242,17 +242,13 @@ I learned how AI-powered systems communicate with external applications, service
 
 ### Projects
 
-#### 01 — [Course Project Name]
+#### 01 — PlanCraft AI — AI Project Planner
 
 **Type:** Guided Project
 
-🔗 [View Project](./06-connect-it-to-the-world/course-project)
+🔗 [View Project](./06-Automation%20%26%20Integration%20Thinking/Course-Project/)
 
-#### 02 — [Independent Project Name]
-
-**Type:** Independent Project
-
-🔗 [View Project](./06-connect-it-to-the-world/independent-project)
+_This unit has no independent project._
 
 ---
 
