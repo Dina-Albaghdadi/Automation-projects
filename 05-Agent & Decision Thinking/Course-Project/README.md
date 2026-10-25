@@ -4,7 +4,9 @@
 
 **🌐 English** · [العربية](#-النسخة-العربية)
 
-> 📸 **Evidence pending:** screenshots of the workflow, conversations, and the Google Sheet will be added.
+![XYZ Real Estate workflow](./Screenshots/workflow.png)
+
+> 📸 Conversation and Google Sheet screenshots will be added.
 
 ---
 
@@ -142,7 +144,9 @@ Each customer keeps their own conversation context; customers never share memory
 
 ## 📸 Evidence
 
-> Screenshots will be added.
+### Workflow
+
+![Workflow](./Screenshots/workflow.png)
 
 ---
 
@@ -172,7 +176,7 @@ An agent is a system that decides and acts, so it needs clear boundaries.
 
 **Live Demo:** Telegram bot (private)
 
-**Workflow:** n8n (private workspace)
+**Workflow:** n8n — *XYZ Real Estate* (published; shown above)
 
 **Repository:** —
 

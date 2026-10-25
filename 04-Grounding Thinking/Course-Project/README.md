@@ -4,7 +4,7 @@
 
 **🌐 English** · [العربية](#-النسخة-العربية)
 
-> 📸 **Evidence pending:** screenshots of the Dify knowledge settings, retrieval testing, and test conversations will be added.
+![TechFix Chatflow](./Screenshots/chatflow.png)
 
 ---
 
@@ -77,6 +77,10 @@ LLM + instructions (grounded, safe, ask if unclear)
 Answer, a clarifying question, or "not enough information"
 ```
 
+**Configuration:** Dify Chatflow (User Input → Knowledge Retrieval → LLM → Answer), knowledge base *TECHFIX* indexed with **Economical (Inverted Index)**, LLM GPT-5 with conversation memory, citations enabled.
+
+![Knowledge retrieval settings](./Screenshots/knowledge-retrieval-settings.png)
+
 ---
 
 ## 🤖 Role of AI
@@ -147,19 +151,62 @@ Ask for details instead of guessing.
 
 ## 🧪 Testing
 
-> Test results and screenshots will be added.
+### Test 1 — Problem in scope, but described too briefly
+
+**Input:**  
+`لكن الإنترنت لا يعمل. كيف أستكشف المشكلة؟ جهازي متصل بشبكة Wi-Fi`
+
+**Expected Result:**  
+Use the internet-connection document, give safe guidance, and ask for the missing details instead of guessing.
+
+**Actual Result:**  
+The answer cited **03-اتصال-الإنترنت.md**, reminded the user not to share the Wi-Fi password, said the reference has no detailed steps for the exact case *"connected to Wi-Fi but no internet"*, and asked three clarifying questions (other devices? operating system? warning icon?).
+
+**Status:** ✅
+
+![Wi-Fi test](./Screenshots/test-wifi-clarifying.png)
+
+---
+
+### Test 2 — Problem outside the knowledge base
+
+**Input:**  
+`How to fix the printer?`
+
+**Expected Result:**  
+Say clearly that the knowledge base has no printer troubleshooting, and do not invent steps.
+
+**Actual Result:**  
+The assistant said the TECHFIX reference contains no documented steps for fixing printers, and invented no steps. However, it then asked five diagnostic questions and promised to guide the user step by step "according to the reference" — which the reference cannot do.
+
+**Status:** ⚠️ Partly passed — no hallucinated steps, but a misleading promise.
+
+![Printer test](./Screenshots/test-printer-out-of-scope.png)
 
 ---
 
 ## 📸 Evidence
 
-> Screenshots will be added.
+### Final Result
+
+![Wi-Fi test](./Screenshots/test-wifi-clarifying.png)
+
+### Workflow
+
+![Chatflow](./Screenshots/chatflow.png)
 
 ---
 
 ## ⚠️ Challenges & Failures
 
-> Will be documented with the test results.
+What didn't work as expected?
+
+- For an out-of-scope question (printers), the assistant correctly refused to invent steps, but still asked diagnostic questions and promised step-by-step help it cannot give from the knowledge base.
+
+How would I fix it?
+
+- Add an explicit instruction: when the topic is outside the four documents, say so and suggest a technician or the device manufacturer, without asking diagnostic questions.
+- Re-run the same question to confirm the change.
 
 ---
 
@@ -188,7 +235,7 @@ A helpful assistant knows when to ask, when to answer, and when to say it does n
 
 ## 🔗 Project Links
 
-**Live Demo:** Dify web app — TechFix
+**Live Demo:** Dify web app — TechFix (published)
 
 **Workflow:** —
 
@@ -226,6 +273,11 @@ Chatbot في Dify مرتبط بأربعة مستندات: بطء الحاسوب�
 
 ### 🧪 الاختبارات
 
-ستُضاف نتائج الاختبارات والصور.
+- **مشكلة ضمن النطاق بوصف مختصر** (الإنترنت لا يعمل مع اتصال Wi-Fi): استند إلى ملف اتصال الإنترنت، ونبّه لعدم مشاركة كلمة المرور، وطلب تفاصيل إضافية بدل التخمين ✅
+- **مشكلة خارج قاعدة المعرفة** (الطابعة): صرّح بعدم وجود خطوات موثقة ولم يخترع حلولًا، لكنه طرح أسئلة تشخيصية ووعد بإرشاد لا تغطيه المعرفة ⚠️
+
+### ⚠️ التحديات
+
+المساعد لم يخترع خطوات للطابعة، لكنه وعد بمساعدة لا يستطيع تقديمها. الحل: تعليمات صريحة بأن يقترح فنيًا أو الشركة المصنّعة عندما يكون الموضوع خارج المستندات الأربعة، ثم إعادة الاختبار.
 
 </div>
