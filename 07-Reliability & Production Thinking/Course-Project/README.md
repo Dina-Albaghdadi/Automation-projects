@@ -239,7 +239,7 @@ If I continued developing this project, I would:
 
 **Live Demo:** —
 
-**Workflow:** [ai-automation-rag.json](./workflow/ai-automation-rag.json) (n8n) · *RAG AI Agent* (private workspace; shown above)
+**Workflow:** [ai-automation-rag.json](./workflow/ai-automation-rag.json) (n8n) · [rag-ai-agent.json](./workflow/rag-ai-agent.json) (n8n)
 
 **Repository:** —
 
