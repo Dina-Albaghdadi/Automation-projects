@@ -260,7 +260,7 @@ If I continued developing this project, I would:
 
 **Live Demo:** [projects-plan-craft-ai.lovable.app](https://projects-plan-craft-ai.lovable.app)
 
-**Workflow:** n8n — *PlanCraft AI — Generate Project Plan* (private workspace; shown above)
+**Workflow:** [plancraft-generate-plan.json](./workflow/plancraft-generate-plan.json) (n8n)
 
 **Repository:** [projects-plan-craft-ai](https://github.com/Dina-Albaghdadi/projects-plan-craft-ai)
 

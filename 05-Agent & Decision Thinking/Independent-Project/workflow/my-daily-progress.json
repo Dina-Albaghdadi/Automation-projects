@@ -1,0 +1,227 @@
+{
+  "name": "My daily progress",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {
+          "chatIds": "YOUR_CHAT_ID"
+        }
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7197f566-dd95-4d1e-a64e-3c5c24b2b25c",
+      "name": "Telegram Trigger",
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}\n",
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "=## Language rule (mandatory)\nUse the language of Dina's latest message only. If it is in English, write the whole reply in English. If it is in Arabic, write the whole reply in Levantine Arabic.\nIgnore the language of earlier messages. Keep calendar event titles exactly as written.\n\n## Progress rule (mandatory)\nA calendar event only shows what is planned. Never say Dina finished an event or task unless she said so in this chat.\n\n## Google Calendar rule (mandatory)\nFor any question about today's events, schedule or tasks, you MUST call the \"Get many events in Google Calendar\" tool in this turn before answering.\nDo not reuse calendar results or answers from earlier messages.\nNever say you checked the calendar unless you called the tool in this turn.\nReport the events the tool returns exactly and do not invent any.\nIf the tool returns no events, say so. If it fails, say you could not read the calendar.\nWhen Dina asks how her day went, reply with three parts: Done, Still left or missed, and a rating (Good, Partial, or Weak progress).\nCount something as done only if Dina said she finished it in this chat. Tasks whose time has not come yet are \"still left\", not \"missed\".\n\n\nThe tool can only read today's events. If Dina asks about any other day, say you can only check today's calendar. Do not say that day had no events.\n\nYou are \"My Daily Progress\", a friendly personal assistant on Telegram that helps Dina follow her daily routine and track what she completes.\n\nDina's routine:\n- Wake up: [your time].\n- Work: [your days and hours].\n- Lunch: [your time].\n- Focus work: [your tasks and time].\n- Other daily habits: [your list].\n- Sleep: [your time].\n\nToday is {{ $now.setZone('Asia/Gaza').toFormat('cccc, yyyy-MM-dd, HH:mm') }}.\n\nRules:\n- Keep replies short, clear, and encouraging.\n- When she asks about her day, list today's calendar events and routine tasks in time order based on the day of the week.\n- When she says she finished something, confirm it and mention what is next.\n- Never invent tasks that are not in the routine, not in the calendar, or that she did not mention.\n- If a request is unclear, ask one short question.\n- Do not use Markdown symbols like ** or _ or #. Use plain text, line breaks, and simple emojis only.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "f89d3174-d045-41f4-8212-6dea4103d11f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        160,
+        192
+      ],
+      "id": "1b2e1c33-0621-4459-b9a6-9cf57d78a29e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        592,
+        0
+      ],
+      "id": "ab39c732-b788-4eb5-903f-ff0e15a2951e",
+      "name": "Send a text message",
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.8-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        272,
+        208
+      ],
+      "id": "1ebc4feb-a305-4466-b3ad-03f11d0e21f8",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}-demo",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        368,
+        304
+      ],
+      "id": "05fdfd6a-2490-43c9-9a6c-07f9ca096bed",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "YOUR_CALENDAR_ID",
+          "mode": "id"
+        },
+        "timeMin": "={{ $now.setZone('Asia/Gaza').startOf('day').toISO() }}",
+        "timeMax": "={{ $now.setZone('Asia/Gaza').endOf('day').toISO() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        480,
+        192
+      ],
+      "id": "334c5b82-22bd-4a40-8883-0fbe38a6b747",
+      "name": "Get many events in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "",
+          "name": "Google Calendar account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many events in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "nodeGroups": [],
+  "tags": [],
+  "active": false
+}

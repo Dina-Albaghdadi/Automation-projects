@@ -1,0 +1,325 @@
+{
+  "name": "PlanCraft AI — Generate Project Plan",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "YOUR_WEBHOOK_PATH",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c77b1f5e-aa56-48c2-bd08-67802280c016",
+      "name": "Webhook"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "86751398-dbd4-4fdc-9a75-2c1c5f401eaa",
+              "name": "request_id",
+              "value": "={{ ($json.body.request_id ?? $json.body.id ?? '').trim() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "5d4ebf0f-2187-4a79-8b4f-aa07e56c9686",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n\"success\": true,\n\"message\": \"Project request received successfully\",\n\"status\": \"processing\"\n}",
+        "options": {
+          "responseCode": 202
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        400,
+        -144
+      ],
+      "id": "9d6d3f6a-a312-4e35-a17a-00e483bf92e4",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "getAll",
+        "projectRef": "YOUR_SUPABASE_PROJECT_REF",
+        "tableId": "project_requests",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $json.request_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        448,
+        0
+      ],
+      "id": "ebc81f8a-edd6-4c9f-9638-5957b01eb423",
+      "name": "Supabase",
+      "credentials": {
+        "supabaseOAuth2Api": {
+          "id": "",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are PlanCraft AI, an expert project planning and execution assistant.\nYour task is to analyze a project request and generate a realistic, structured, actionable project plan tailored to the user's actual needs.\nPROJECT REQUEST\nProject Title:\n{{ $('Supabase').item.json.title }}\nProject Description:\n{{ $('Supabase').item.json.description }}\nProject Goal:\n{{ $('Supabase').item.json.goal || 'Not specified' }}\nAdditional Context:\n{{ $('Supabase').item.json.additional_context || 'Not specified' }}\nPLANNING INSTRUCTIONS\n1. Understand the project title, description, goal, and additional context before creating the plan.\n2. Create a plan that directly addresses the requested project rather than providing generic advice.\n3. Divide the work into 3 to 6 logical phases, ordered from the initial preparation to completion.\n4. Ensure each phase has a clear objective, a useful description, and specific actions that help achieve that objective.\n5. Make the actions practical, clear, and achievable.\n6. Assign a priority to each phase:\n  - High: Essential for project success or a critical dependency.\n  - Medium: Important but not immediately critical.\n  - Low: Optional or suitable for a later stage.\n7. Provide recommended actions that are useful across the project and do not simply repeat every phase action.\n8. Identify realistic project risks and provide a practical mitigation strategy for each risk.\n9. Estimate the overall project duration based on its complexity and scope. State the estimate clearly, such as \"4 weeks\" or \"10 working days\".\n10. Do not invent specific facts about the user's resources, budget, team, or deadlines when they are not provided. Make reasonable assumptions only when necessary.\nOUTPUT REQUIREMENTS\nReturn one valid JSON object containing exactly these six top-level keys:\n{\n  \"summary\": \"A concise summary of the project plan.\",\n  \"project_goal\": \"A clear statement of the main outcome the project should achieve.\",\n  \"phases\": [\n    {\n      \"title\": \"Phase title\",\n      \"objective\": \"The specific outcome this phase must achieve.\",\n      \"description\": \"A concise explanation of the work covered by this phase.\",\n      \"actions\": [\n        \"A specific and actionable task.\",\n        \"Another specific and actionable task.\"\n      ],\n      \"priority\": \"High\"\n    }\n  ],\n  \"recommended_actions\": [\n    \"A practical project-wide recommendation.\",\n    \"Another useful project-wide recommendation.\"\n  ],\n  \"risks\": [\n    {\n      \"risk\": \"A realistic risk relevant to this project.\",\n      \"mitigation\": \"A specific action to reduce the likelihood or impact of this risk.\"\n    }\n  ],\n  \"estimated_duration\": \"A realistic estimate of the total project duration.\"\n}\nSTRICT STRUCTURAL RULES\n- Return exactly the six top-level keys specified above.\n- Include between 3 and 6 phase objects in the phases array.\n- Every phase must contain exactly these keys:\n  title, objective, description, actions, priority.\n- Every phase's actions value must be an array of strings.\n- Every priority value must be exactly one of: High, Medium, Low.\n- The recommended_actions value must be an array of strings.\n- The risks value must be an array of objects.\n- Every risk object must contain exactly two string fields: risk and mitigation.\n- The summary, project_goal, and estimated_duration values must be strings.\n- Use double quotes for all JSON keys and string values.\n- Do not include trailing commas.\n- Do not return null values.\n- Do not return undefined values.\n- Do not place arrays or objects inside quotation marks as serialized JSON strings.\n- Do not add extra fields.\n- Do not omit required fields.\n- Ensure the entire response is valid JSON that can be parsed directly by a JSON parser.\nReturn JSON only. Do not include Markdown fences, explanations, comments, or text outside the JSON object.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        672,
+        0
+      ],
+      "id": "64772a48-058a-4661-a2a4-cf597de77929",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.8-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        528,
+        160
+      ],
+      "id": "33919a91-80c4-47da-822f-cf1fc380a1c6",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"summary\": {\n      \"type\": \"string\"\n    },\n    \"project_goal\": {\n      \"type\": \"string\"\n    },\n    \"phases\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"title\": {\n            \"type\": \"string\"\n          },\n          \"objective\": {\n            \"type\": \"string\"\n          },\n          \"description\": {\n            \"type\": \"string\"\n          },\n          \"actions\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"string\"\n            }\n          },\n          \"priority\": {\n            \"type\": \"string\",\n            \"enum\": [\"High\", \"Medium\", \"Low\"]\n          }\n        },\n        \"required\": [\n          \"title\",\n          \"objective\",\n          \"description\",\n          \"actions\",\n          \"priority\"\n        ],\n        \"additionalProperties\": false\n      }\n    },\n    \"recommended_actions\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"string\"\n      }\n    },\n    \"risks\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"risk\": {\n            \"type\": \"string\"\n          },\n          \"mitigation\": {\n            \"type\": \"string\"\n          }\n        },\n        \"required\": [\"risk\", \"mitigation\"],\n        \"additionalProperties\": false\n      }\n    },\n    \"estimated_duration\": {\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"summary\",\n    \"project_goal\",\n    \"phases\",\n    \"recommended_actions\",\n    \"risks\",\n    \"estimated_duration\"\n  ],\n  \"additionalProperties\": false\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        848,
+        208
+      ],
+      "id": "b9dbd19b-0ec3-49e9-8e87-347eeb781010",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "projectRef": "YOUR_SUPABASE_PROJECT_REF",
+        "tableId": "project_plans",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "request_id",
+              "fieldValue": "={{ $('Edit Fields').item.json.request_id }}"
+            },
+            {
+              "fieldId": "summary",
+              "fieldValue": "={{ $json.output.summary }}"
+            },
+            {
+              "fieldId": "project_goal",
+              "fieldValue": "={{ $json.output.project_goal }}"
+            },
+            {
+              "fieldId": "phases",
+              "fieldValue": "={{ $json.output.phases }}"
+            },
+            {
+              "fieldId": "recommended_actions",
+              "fieldValue": "={{ $json.output.recommended_actions }}"
+            },
+            {
+              "fieldId": "risks",
+              "fieldValue": "={{ $json.output.risks }}"
+            },
+            {
+              "fieldId": "estimated_duration",
+              "fieldValue": "={{ $json.output.estimated_duration }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        16
+      ],
+      "id": "7e4109b9-debd-47be-bca6-47ec0a8d3988",
+      "name": "Create a row",
+      "credentials": {
+        "supabaseOAuth2Api": {
+          "id": "",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "update",
+        "projectRef": "YOUR_SUPABASE_PROJECT_REF",
+        "tableId": "project_requests",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Edit Fields').item.json.request_id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "completed"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1264,
+        16
+      ],
+      "id": "f114a4b3-b49e-4f18-9662-b46ed6440d8c",
+      "name": "Update a row",
+      "credentials": {
+        "supabaseOAuth2Api": {
+          "id": "",
+          "name": "Supabase account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a row": {
+      "main": [
+        [
+          {
+            "node": "Update a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "nodeGroups": [],
+  "pinData": {}
+}

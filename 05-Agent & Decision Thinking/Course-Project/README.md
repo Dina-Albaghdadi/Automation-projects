@@ -193,7 +193,7 @@ An agent is a system that decides and acts, so it needs clear boundaries.
 
 **Live Demo:** Telegram bot (private)
 
-**Workflow:** n8n — *XYZ Real Estate* (published; shown above)
+**Workflow:** [xyz-real-estate.json](./workflow/xyz-real-estate.json) (n8n)
 
 **Repository:** —
 
