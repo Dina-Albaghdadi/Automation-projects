@@ -33,6 +33,7 @@ What does the system do?
 3. Prevents adding the same company and job twice, even with different letter case or extra spaces.
 4. Shows the list of applications and a summary by status (`Applied`, `Interview`, `Offer`, `Rejected`), with status update and delete.
 5. Ensures each user sees and edits **only their own applications** through Row Level Security in Supabase.
+6. Extracts the company, job title, job link, and required skills from a pasted job post. The user reviews and edits the result before saving, and anything missing from the post stays empty.
 
 ![Application added](./Screenshots/EV-07-t1-application-added.png)
 
@@ -88,12 +89,14 @@ What does AI do in this solution?
 - **Lovable (AI)** generated the whole interface from one detailed prompt: pages, form, validation, and error messages.
 - It connected the interface to the existing Supabase table and turned database errors (such as the duplicate code `23505`) into clear messages.
 
-The app itself does not use AI at runtime; it is a data system with fixed rules.
+The app also uses AI at runtime for one feature, **Extract from job post**: a server-side function reads the pasted post and returns structured fields. It only fills the form. The existing validation rules still decide what can be saved.
 
 ### What AI Should NOT Do
 
 - Create or change the database and RLS automatically. I explicitly told Lovable not to change the database, because protection must be written and reviewed.
 - Be trusted when it says something "works". Every function was proven with a test and a screenshot.
+- Guess missing details. If a post has no company or link, the field stays empty and shows `Not found in the job post`.
+- Save anything by itself. The user reviews the extracted fields and presses **Save**.
 
 ---
 
@@ -116,12 +119,14 @@ What parts of the process are automated?
 
 - Account: email and password.
 - Application: company, job title, job link (optional), applied date, status, notes (optional).
+- Job post (optional): pasted text used to fill the form.
 
 ### Output
 
 - A row in the `job_applications` table linked to the user.
 - The list of applications, with a status filter.
 - A summary: Total, Applied, Interview, Offer, Rejected.
+- Extracted fields for review, including `required_skills`, a list stored with the application.
 - Clear validation and error messages for invalid input.
 
 ---
@@ -253,6 +258,40 @@ Note: PageSpeed visits the site without signing in, so the result measures the l
 
 ---
 
+### Test 6 — AI Extraction: Complete Post
+
+**Input:**  
+A job post that names the company, job title, link, and five required skills.
+
+**Expected Result:**  
+All fields and all five skills are filled in the form, and nothing is saved before the user presses **Save**.
+
+**Actual Result:**  
+The form showed `Nexora Solutions`, `Junior Backend Developer`, the link, and `PHP`, `Laravel`, `MySQL`, `REST APIs`, `Git`. After **Save**, the application appeared in the list with its link.
+
+**Status:** ✅
+
+![Extraction from a complete post](./Screenshots/EV-20-t6-extract-complete-post.png)
+
+---
+
+### Test 7 — AI Extraction: Incomplete Post
+
+**Input:**  
+`We need a Data Entry Assistant. Good Excel skills and attention to detail are required. Send your CV to us.`
+
+**Expected Result:**  
+The job title and skills are filled, the company and link stay empty, and saving without a company is blocked.
+
+**Actual Result:**  
+The AI filled `Data Entry Assistant`, `Excel`, and `attention to detail`, and invented nothing. The company and link showed `Not found in the job post`, and **Save** showed `Company is required.`
+
+**Status:** ✅
+
+![Extraction from an incomplete post](./Screenshots/EV-21-t7-extract-incomplete-post.png)
+
+---
+
 ## 📸 Evidence
 
 ### Final Result
@@ -288,6 +327,8 @@ Note: PageSpeed visits the site without signing in, so the result measures the l
 | EV-17 | Test 5: PageSpeed scores (mobile) | [EV-17](./Screenshots/EV-17-pagespeed-mobile-scores.png) |
 | EV-18 | Test 5: performance metrics | [EV-18](./Screenshots/EV-18-pagespeed-performance-metrics.png) |
 | EV-19 | Test 5: diagnostics | [EV-19](./Screenshots/EV-19-pagespeed-diagnostics.png) |
+| EV-20 | Test 6: extraction from a complete post | [EV-20](./Screenshots/EV-20-t6-extract-complete-post.png) |
+| EV-21 | Test 7: incomplete post, nothing invented and saving blocked | [EV-21](./Screenshots/EV-21-t7-extract-incomplete-post.png) |
 
 ---
 
@@ -368,7 +409,7 @@ If I continued developing this project, I would:
 
 ### 💡 الحل
 
-تطبيق مبني بـ**Lovable** ومتصل بـ**Supabase**: تسجيل حساب مع تأكيد البريد، وإضافة طلب مع التحقق من المدخلات، ومنع التكرار حتى مع اختلاف الأحرف والمسافات، وقائمة الطلبات مع ملخص حسب الحالة، وعزل بيانات كل مستخدم عبر RLS.
+تطبيق مبني بـ**Lovable** ومتصل بـ**Supabase**: تسجيل حساب مع تأكيد البريد، وإضافة طلب مع التحقق من المدخلات، ومنع التكرار حتى مع اختلاف الأحرف والمسافات، وقائمة الطلبات مع ملخص حسب الحالة، وعزل بيانات كل مستخدم عبر RLS. ويستخرج التطبيق بالذكاء الاصطناعي الشركة والوظيفة والرابط والمهارات من نص إعلان الوظيفة، ويراجعها المستخدم قبل الحفظ، وما لا يوجد في الإعلان يبقى فارغًا.
 
 ### 🧠 كيف صممت الحل
 
@@ -387,6 +428,8 @@ If I continued developing this project, I would:
 - **حالة حدّية:** نفس الطلب بأحرف كبيرة ومسافات، فظهرت رسالة التكرار ✅
 - **الوصول للبيانات:** المستخدم B فتح رابط طلب المستخدم A مباشرة، فظهر *Application not found* بدون أي بيانات ✅
 - **الأداء:** Performance 98، وAccessibility 95، وBest Practices 100، وSEO 100 ✅
+- **الاستخراج من إعلان كامل:** امتلأت الشركة والوظيفة والرابط والمهارات الخمس، وحُفظ الطلب بعد مراجعته ✅
+- **الاستخراج من إعلان ناقص:** لم يخترع الـAI شركة أو رابطًا، وظهر *Not found in the job post*، ومُنع الحفظ بدون شركة ✅
 
 ### ⚠️ التحديات وكيف حللتها
 
