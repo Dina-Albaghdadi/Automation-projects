@@ -152,7 +152,7 @@ I learned how to transform a problem into a system and use AI-powered tools to d
 
 🔗 [View Project](./02-System%20Thinking/Course-Project/)
 
-#### 02 — [Independent Project Name]
+#### 02 — Professional Portfolio with an AI Assistant
 
 **Type:** Independent Project
 
