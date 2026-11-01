@@ -47,10 +47,10 @@ The ability to turn a problem into requirements, design a system, and build an a
 
 ### 02 — Independent Project
 
-**Project:** Professional Portfolio *(in progress)*
+**Project:** Professional Portfolio with an AI Assistant
 
 - **Problem:** A portfolio should show who I am and what I built, not only a static CV.
-- **Solution:** A professional portfolio built with Lovable, with an AI feature that adds real value for visitors.
+- **Solution:** A portfolio built with Lovable that shows 15 projects, with an assistant that answers visitors only from documented information.
 - **Tools:** Lovable
 
 [Explore the Project](./Independent-Project/)
@@ -121,7 +121,7 @@ The ability to turn a problem into requirements, design a system, and build an a
 ### 🛠️ المشاريع
 
 - **مشروع المحاضرة — SkillBridge Lite:** تطبيق يقارن الملف المهني بفرصة عمل، ويعرض المهارات المناسبة مع أدلة من الملف، والفجوات، والخطوات التالية.
-- **المشروع المستقل — Professional Portfolio** *(قيد التنفيذ)*: ملف مهني مبني بـLovable مع ميزة ذكاء اصطناعي ذات قيمة للزائر.
+- **المشروع المستقل — Professional Portfolio**: ملف مهني مبني بـLovable مع ميزة ذكاء اصطناعي ذات قيمة للزائر.
 
 ### 📌 الخلاصة
 

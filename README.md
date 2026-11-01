@@ -51,7 +51,7 @@ The projects demonstrate my progression from understanding real-world work to de
 | Unit | Capability | Projects | Status |
 |---|---|---|---|
 | U1 | Process & Data Thinking | 2 Projects | ✅ |
-| U2 | AI-Powered Solution Building | 2 Projects | 🟡 |
+| U2 | AI-Powered Solution Building | 2 Projects | ✅ |
 | U3 | Quality Thinking | 2 Projects | ✅ |
 | U4 | Knowledge Grounding | 2 Projects | 🟡 |
 | U5 | Agent & Decision Thinking | 2 Projects | 🟡 |
