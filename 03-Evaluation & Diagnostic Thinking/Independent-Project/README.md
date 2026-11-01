@@ -243,7 +243,7 @@ User B's dashboard showed Total = 0. The direct link showed `Application not fou
 ### Test 5 — Performance (PageSpeed Insights, Mobile)
 
 **Input:**  
-`https://jobtrack-dina.lovable.app/`
+`https://personal-job-track.lovable.app/`
 
 **Expected Result:**  
 Scores in the green range (90–100), and any issues recorded.
@@ -378,11 +378,11 @@ If I continued developing this project, I would:
 
 ## 🔗 Project Links
 
-**Live Demo:** [jobtrack-dina.lovable.app](https://jobtrack-dina.lovable.app/)
+**Live Demo:** [personal-job-track.lovable.app](https://personal-job-track.lovable.app/)
 
 **Workflow:** —
 
-**Repository:** —
+**Repository:** [personal-job-track](https://github.com/Dina-Albaghdadi/personal-job-track)
 
 ---
 
