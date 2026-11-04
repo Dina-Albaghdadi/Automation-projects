@@ -182,6 +182,21 @@ The full test table, with all 22 tests and evidence, is in the [project reposito
 
 ---
 
+## 💰 Pricing
+
+Based on the real build time: 5 working days, 9 to 5 (40 hours), at $15 per hour.
+
+| Item | Amount |
+|---|---:|
+| Fixed project fee | **$600** |
+| Payments | 40% at approval, 40% after testing, 20% at handover |
+| Running costs (client) | n8n Cloud about €24 per month. Gemini free tier, or under $5 per month on the paid tier (estimate). Telegram and Google: $0 |
+| Support | 30 days of fixes included. Then optional maintenance at $45 per month (up to 3 hours) |
+
+The full scope, deliverables, acceptance criteria, and risks are in the [client proposal](./docs/client-proposal.md).
+
+---
+
 ## 🔗 Project Links
 
 **Live demo:** Telegram bot (private), shown in the final presentation
@@ -235,6 +250,10 @@ The full test table, with all 22 tests and evidence, is in the [project reposito
 ### 🚀 التشغيل والتسليم
 
 الـWorkflows على n8n Cloud، والبيانات في Google Sheets، وصفحة الاعتماد على Apps Script. خطوات الإعداد والاستخدام كاملة في [مستودع المشروع](https://github.com/Dina-Albaghdadi/Athar).
+
+### 💰 التسعير
+
+سعر ثابت **600 دولار**: 40 ساعة عمل حقيقية (5 أيام من 9 إلى 5) × 15 دولارًا. تكاليف التشغيل على العميل: n8n Cloud حوالي 24 يورو شهريًا، وGemini مجاني أو أقل من 5 دولارات بالخطة المدفوعة. التفاصيل في [عرض السعر](./docs/client-proposal.md).
 
 ### 📌 ماذا تعلمت
 
