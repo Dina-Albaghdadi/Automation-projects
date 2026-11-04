@@ -57,13 +57,28 @@ The projects demonstrate my progression from understanding real-world work to de
 | U5 | Agent & Decision Thinking | 2 Projects | 🟡 |
 | U6 | Integration Thinking | 1 Project | ✅ |
 | U7 | Reliability Thinking | 1 Project | ✅ |
-| U8 | Solution Engineering | 2 Projects | ⬜ |
+| U8 | Solution Engineering | 1 Project (Final Project) | ✅ |
 
 ---
 
 # ⭐ Featured Projects
 
 > My strongest projects will be highlighted here after completing the course.
+
+### ⭐ Final Project — Athar | أثر: Field Work, Turned into Impact Reports
+
+**What it solves:**  
+Women's organizations collect activity data by hand from chat messages and paper attendance sheets, and the numbers in donor reports do not always match. Staff record each activity on Telegram, and at the end of the month Athar prepares a donor report that the manager approves from an email.
+
+**Tools:**  
+n8n, Telegram, Google Gemini (extraction, embeddings for RAG, writing), Google Sheets, Google Apps Script, Google Docs, Gmail
+
+**My role:**  
+Analyzed the problem, chose an AI workflow with RAG instead of an agent, built two n8n workflows and an Apps Script approval app, and ran 22 live tests in Arabic and English, including privacy, duplicates, permissions, and service failures.
+
+🔗 [View Project](./08-Solution%20Engineering/Independent-Project/)
+
+---
 
 ### ⭐ Project 01 — IT Support Requests: AI Intake & Routing
 
@@ -282,17 +297,11 @@ I learned how to choose the right solution for a real-world problem by consideri
 
 ### Projects
 
-#### 01 — [Course Project Name]
+#### 01 — Athar | أثر: Field Work, Turned into Impact Reports ✅
 
-**Type:** Guided Project
+**Type:** Final Project (Independent)
 
-🔗 [View Project](./08-engineer-the-right-solution/course-project)
-
-#### 02 — [Independent Project Name]
-
-**Type:** Independent Project
-
-🔗 [View Project](./08-engineer-the-right-solution/independent-project)
+🔗 [View Project](./08-Solution%20Engineering/Independent-Project/)
 
 ---
 
@@ -320,6 +329,11 @@ Tools and technologies I worked with throughout the course:
 - Zapier
 - AI by Zapier
 - Paths by Zapier
+- n8n
+- Telegram Bot API
+- Google Gemini
+- Google Apps Script
+- RAG
 - APIs
 - Webhooks
 - External Services
